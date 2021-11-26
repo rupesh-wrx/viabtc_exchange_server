@@ -106,7 +106,7 @@ RUN apt-get install -y \
     libldap-2.4 \
     libgss3 \
     librtmp1 \
-    libmysqlclient20 \
+    libmysqlclient-dev \
     jq \
     netcat
 RUN rm -rf /var/lib/apt/lists/*
