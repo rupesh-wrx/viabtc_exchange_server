@@ -143,8 +143,8 @@ if [ $DAEMON ]; then
 		echo "=== $DAEMON: db_log is up"
   fi
 	echo "=== $DAEMON: ready to exec"
-	echo "./$DAEMON.exe ./${DAEMON}.json"
-	./$DAEMON.exe ./${DAEMON}.json
+	echo "./$DAEMON.exe ${DAEMON}.json"
+	./$DAEMON.exe ${DAEMON}.json
 	NEW=1
 	while true; do
 		sleep 5
