@@ -48,12 +48,12 @@
         "max_pkg_size": 2000000
     },
     "deals": {
-        "brokers": "kafka:9092",
+        "brokers": "192.168.18.20:9092",
         "topic": "deals",
         "partition": 0
     },
     "orders": {
-        "brokers": "kafka:9092",
+        "brokers": "192.168.18.20:9092",
         "topic": "orders",
         "partition": 0
     },

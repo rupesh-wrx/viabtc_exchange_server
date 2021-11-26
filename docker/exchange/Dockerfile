@@ -5,33 +5,33 @@ FROM ubuntu:16.04 AS BUILDSTEP
 RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y \
-      jq \
-      netcat \
-      inetutils-ping \
-      vim \
-      git \
-      wget \
-      make \
-      cmake \
-      gcc \
-      g++ \
-      python \
-      libzstd-dev \
-      liblz4-dev \
-      libev-dev \
-      libmpdec-dev \
-      libjansson-dev \
-      libssl-dev \
-      libgnutls-dev \
-      libmysqlclient-dev \
-      libhttp-parser-dev \
-      libcurl4-openssl-dev \
-			libldap2-dev \
-			libkrb5-dev \
-			libalberta-dev  \
-			libgss-dev \
-			libidn11-dev \
-			librtmp-dev &&\
+    jq \
+    netcat \
+    inetutils-ping \
+    vim \
+    git \
+    wget \
+    make \
+    cmake \
+    gcc \
+    g++ \
+    python \
+    libzstd-dev \
+    liblz4-dev \
+    libev-dev \
+    libmpdec-dev \
+    libjansson-dev \
+    libssl-dev \
+    libgnutls-dev \
+    libmysqlclient-dev \
+    libhttp-parser-dev \
+    libcurl4-openssl-dev \
+    libldap2-dev \
+    libkrb5-dev \
+    libalberta-dev  \
+    libgss-dev \
+    libidn11-dev \
+    librtmp-dev &&\
     rm -rf /var/lib/apt/lists/* 
 
 RUN git clone https://github.com/edenhill/librdkafka.git \
@@ -39,6 +39,8 @@ RUN git clone https://github.com/edenhill/librdkafka.git \
     && ./configure --install-deps \
     && make \
     && make install \
+    && cp src/*.so.1 /usr/lib \
+    && cp src/*.so /usr/lib \
     && cd / \
     && rm -rf librdkafka
 
@@ -101,38 +103,43 @@ FROM ubuntu:16.04
 RUN apt-get update
 RUN apt-get upgrade -y
 RUN apt-get install -y \
-			libldap-2.4 \
-			libgss3 \
-			librtmp1 \
-			libmysqlclient20 \
-			jq \
-			netcat
+    libldap-2.4 \
+    libgss3 \
+    librtmp1 \
+    libmysqlclient20 \
+    jq \
+    netcat
 RUN rm -rf /var/lib/apt/lists/*
 
 RUN mkdir /viabtc_exchange_server
 # keep .exe for better grep of ps output
 COPY --from=BUILDSTEP   /viabtc_exchange_server/alertcenter/alertcenter.exe \
-                        /viabtc_exchange_server/alertcenter.exe
+    /viabtc_exchange_server/alertcenter.exe
 COPY docker/exchange/configs/alertcenter.json /viabtc_exchange_server
 
 COPY --from=BUILDSTEP   /viabtc_exchange_server/matchengine/matchengine.exe \
-                        /viabtc_exchange_server/matchengine.exe
+    /viabtc_exchange_server/matchengine.exe
 COPY docker/exchange/configs/matchengine.json /viabtc_exchange_server
 
 COPY --from=BUILDSTEP   /viabtc_exchange_server/marketprice/marketprice.exe \
-                        /viabtc_exchange_server/marketprice.exe
+    /viabtc_exchange_server/marketprice.exe
 COPY docker/exchange/configs/marketprice.json /viabtc_exchange_server
 
 COPY --from=BUILDSTEP   /viabtc_exchange_server/readhistory/readhistory.exe \
-                        /viabtc_exchange_server/readhistory.exe
+    /viabtc_exchange_server/readhistory.exe
 COPY docker/exchange/configs/readhistory.json /viabtc_exchange_server
 
 COPY --from=BUILDSTEP   /viabtc_exchange_server/accesshttp/accesshttp.exe \
-                        /viabtc_exchange_server/accesshttp.exe
+    /viabtc_exchange_server/accesshttp.exe
 COPY docker/exchange/configs/accesshttp.json /viabtc_exchange_server
 
 COPY --from=BUILDSTEP   /viabtc_exchange_server/accessws/accessws.exe \
-                        /viabtc_exchange_server/accessws.exe
+    /viabtc_exchange_server/accessws.exe
+
+COPY --from=BUILDSTEP   /usr/lib /usr/lib
+COPY --from=BUILDSTEP   /usr/include /usr/include
+COPY --from=BUILDSTEP   /lib /lib
+
 COPY docker/exchange/configs/accessws.json /viabtc_exchange_server
 
 COPY docker/exchange/entrypoint.sh /docker-entrypoint.sh

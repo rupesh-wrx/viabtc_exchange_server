@@ -24,15 +24,15 @@
   },
   "cli": "tcp@127.0.0.1:7317",
   "db_log": {
-    "host": "mysql",
-    "user": "exchange",
-    "pass": "exchange",
+    "host": "192.168.18.10",
+    "user": "root",
+    "pass": "root",
     "name": "trade_log"
   },
   "db_history": {
-    "host": "mysql",
-    "user": "exchange",
-    "pass": "exchange",
+    "host": "192.168.18.10",
+    "user": "root",
+    "pass": "root",
     "name": "trade_history"
   },
   "assets": [
@@ -60,7 +60,7 @@
           "min_amount":"0.00001"
       }
   ],
-  "brokers": "kafka:9092",
+  "brokers": "192.168.18.20:9092",
   "slice_interval": 3600,
   "slice_keeptime": 259200 
 }
