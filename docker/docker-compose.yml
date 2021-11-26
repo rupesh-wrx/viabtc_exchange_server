@@ -2,7 +2,9 @@ version: '3.4'
 services:
 
   mysql:
-    image: mariadb
+    image: mysql:5.7.22
+    ports:
+      - "3306:3306"
     container_name: exchange_mysql
     restart: always
     command: mysqld

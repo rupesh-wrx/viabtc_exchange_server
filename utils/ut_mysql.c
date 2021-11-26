@@ -21,6 +21,7 @@ MYSQL *mysql_connect(mysql_cfg *db)
         mysql_close(conn);
         return NULL;
     }
+    printf("mysql_real_connect: %s, %s, %s, %s, %s", db->host, db->user, db->pass, db->name, db->port);
     if (mysql_real_connect(conn, db->host, db->user, db->pass, db->name, db->port, NULL, 0) == NULL) {
         mysql_close(conn);
         return NULL;
