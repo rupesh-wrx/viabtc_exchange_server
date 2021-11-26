@@ -12,7 +12,7 @@ MYSQL *mysql_connect(mysql_cfg *db)
     MYSQL *conn = mysql_init(NULL);
     if (conn == NULL)
         printf("Failure in init: %s\n", mysql_get_client_info());
-        fprintf(stderr, "%s\n", mysql_error(con));
+        fprintf(stderr, "%s\n", mysql_error(conn));
         return NULL;
 
     bool reconnect = 1;
