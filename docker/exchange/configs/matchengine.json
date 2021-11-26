@@ -24,13 +24,13 @@
   },
   "cli": "tcp@127.0.0.1:7317",
   "db_log": {
-    "host": "192.168.18.10",
+    "host": "mysql",
     "user": "root",
     "pass": "root",
     "name": "trade_log"
   },
   "db_history": {
-    "host": "192.168.18.10",
+    "host": "mysql",
     "user": "root",
     "pass": "root",
     "name": "trade_history"
