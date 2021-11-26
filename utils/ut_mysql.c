@@ -8,8 +8,11 @@
 
 MYSQL *mysql_connect(mysql_cfg *db)
 {
+    printf("MySQL client version: %s\n", mysql_get_client_info());
     MYSQL *conn = mysql_init(NULL);
     if (conn == NULL)
+        printf("Failure in init: %s\n", mysql_get_client_info());
+        fprintf(stderr, "%s\n", mysql_error(con));
         return NULL;
 
     bool reconnect = 1;

@@ -23,7 +23,7 @@ RUN apt-get update && \
     libjansson-dev \
     libssl-dev \
     libgnutls-dev \
-    libmysqlclient-dev \
+    default-libmysqlclient-dev \
     libhttp-parser-dev \
     libcurl4-openssl-dev \
     libldap2-dev \
@@ -106,7 +106,7 @@ RUN apt-get install -y \
     libldap-2.4 \
     libgss3 \
     librtmp1 \
-    libmysqlclient-dev \
+    default-libmysqlclient-dev \
     jq \
     netcat
 RUN rm -rf /var/lib/apt/lists/*
