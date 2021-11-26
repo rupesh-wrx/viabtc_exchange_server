@@ -15,11 +15,11 @@ services:
       MYSQL_DATABASE: trade_history
     volumes:
       - /home/ubuntu/viabtc_exchange_server/docker/mysql/data:/var/lib/mysql
-      - /home/ubuntu/viabtc_exchange_server/mysql/my.cnf:/etc/mysql/my.cnf
-      - /home/ubuntu/viabtc_exchange_server/mysql/entrypoint.sh:/docker-entrypoint-initdb.d/entrypoint.sh
-      - /home/ubuntu/viabtc_exchange_server/mysql/init_trade_history.sh:/docker-entrypoint-files/init_trade_history.sh
-      - /home/ubuntu/viabtc_exchange_server/mysql/create_trade_history.sql:/docker-entrypoint-files/create_trade_history.sql
-      - /home/ubuntu/viabtc_exchange_server/mysql/create_trade_log.sql:/docker-entrypoint-files/create_trade_log.sql
+      - /home/ubuntu/viabtc_exchange_server/docker/mysql/my.cnf:/etc/mysql/my.cnf
+      - /home/ubuntu/viabtc_exchange_server/docker/mysql/entrypoint.sh:/docker-entrypoint-initdb.d/entrypoint.sh
+      - /home/ubuntu/viabtc_exchange_server/docker/mysql/init_trade_history.sh:/docker-entrypoint-files/init_trade_history.sh
+      - /home/ubuntu/viabtc_exchange_server/docker/mysql/create_trade_history.sql:/docker-entrypoint-files/create_trade_history.sql
+      - /home/ubuntu/viabtc_exchange_server/docker/mysql/create_trade_log.sql:/docker-entrypoint-files/create_trade_log.sql
     networks:
       exchange_net:
         ipv4_address: 192.168.18.10
